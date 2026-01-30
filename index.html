@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamudi Pathirana | Electrical & Electronic Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <style>
+    :root { 
+        /* Updated to Teal/Emerald Accents */
+        --accent: #2dd4bf; 
+        --teal-glow: rgba(20, 184, 166, 0.15); 
+    }
+    
+    body { 
+        font-family: 'Inter', sans-serif; 
+        color: #cbd5e1; 
+        background-color: #064e3b;
+        /* New Gradient: Deep Forest to Midnight */
+        background: radial-gradient(circle at 50% 0%, #064e3b 0%, #020617 50%, #065f46 100%);
+        background-attachment: fixed;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    /* --- Background Shapes (Updated Colors) --- */
+    .shape { 
+        position: fixed; 
+        z-index: -1; 
+        filter: blur(40px);
+        border-radius: 50%;
+        pointer-events: none;
+        transition: transform 0.2s ease-out;
+    }
+    #shape1 { width: 400px; height: 400px; background: rgba(45, 212, 191, 0.1); top: -100px; left: -100px; }
+    #shape2 { width: 500px; height: 500px; background: rgba(16, 185, 129, 0.1); bottom: -100px; right: -100px; }
+    #shape3 { width: 300px; height: 300px; background: rgba(52, 211, 153, 0.05); top: 40%; left: 50%; }
+
+    /* --- Typography & Cards --- */
+    .name-gradient {
+        /* New Gradient: White to Teal to Cyan */
+        background: linear-gradient(to right, #ffffff 30%, #2dd4bf 60%, #22d3ee 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .glass-card { 
+        background: rgba(15, 23, 42, 0.3); 
+        backdrop-filter: blur(16px); 
+        border: 1px solid rgba(255,255,255,0.05); 
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .glass-card:hover { 
+        border-color: rgba(45, 212, 191, 0.4); 
+        background: rgba(15, 23, 42, 0.5);
+        box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+    }
+
+    .section-title { 
+        color: #f8fafc; font-weight: 700; border-left: 5px solid #10b981; 
+        padding-left: 1.5rem; margin-bottom: 2.5rem; text-transform: uppercase; 
+        letter-spacing: 0.3em; font-size: 1rem; 
+    }
+
+    /* --- Navigation --- */
+    .nav-link {
+        display: block; font-size: 1.1rem; text-transform: uppercase;
+        letter-spacing: 0.2em; color: #475569; padding: 0.8rem 0;
+        transition: all 0.4s ease; position: relative;
+    }
+    .nav-link:hover { color: #cbd5e1; }
+    .nav-link.active { color: #2dd4bf; font-weight: 700; transform: translateX(15px); }
+    .nav-link.active::before {
+        content: ''; position: absolute; left: -25px; top: 50%;
+        width: 15px; height: 2px; background: #2dd4bf; box-shadow: 0 0 10px #2dd4bf;
+    }
+
+    /* --- Docking Animation (Desktop) --- */
+    #header-image-wrapper, #header-name-wrapper, #header-socials-wrapper {
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 100;
+    }
+
+    .is-scrolled #header-image-wrapper {
+        position: fixed; top: 30px; left: 5%; transform: scale(0.25); transform-origin: left top;
+    }
+    .is-scrolled #header-name-wrapper {
+        position: fixed; top: 120px; left: 5%; text-align: left; transform: scale(0.35); transform-origin: left top;
+    }
+    .is-scrolled #header-socials-wrapper {
+        position: fixed; top: 220px; left: 5%; transform: scale(0.6); transform-origin: left top; gap: 1rem !important;
+    }
+    .is-scrolled #tagline { opacity: 0; visibility: hidden; }
+
+    /* --- Mobile Responsive Fixes --- */
+    @media (max-width: 768px) {
+        .is-scrolled #header-image-wrapper, 
+        .is-scrolled #header-name-wrapper, 
+        .is-scrolled #header-socials-wrapper {
+            position: relative !important;
+            top: 0 !important;
+            left: 0 !important;
+            transform: scale(1) !important;
+            text-align: center !important;
+        }
+
+        h1.text-7xl { font-size: 3rem !important; }
+        #tagline { font-size: 1.1rem !important; opacity: 1 !important; visibility: visible !important; }
+        .glass-card { padding: 1.5rem !important; }
+        main { padding: 0 1.5rem !important; }
+        .space-y-48 > :not([hidden]) ~ :not([hidden]) {
+            margin-top: 4rem !important;
+        }
+        aside { display: none; } 
+    }
+
+    /* Icons */
+    .premium-icon-large { 
+        width: 48px; height: 48px; fill: #94a3b8; 
+        transition: all 0.4s ease; 
+    }
+    .premium-icon-large:hover { fill: #f8fafc; transform: translateY(-5px); }
+</style>
+</head>
+<body>
+
+    <div class="shape" id="shape1"></div>
+    <div class="shape" id="shape2"></div>
+    <div class="shape" id="shape3"></div>
+
+    <header class="min-h-screen flex flex-col items-center justify-center text-center px-4 relative">
+        <div class="mb-12">
+            <img src="pamudi.png" alt="Pamudi Pathirana" class="w-64 h-64 rounded-full border-4 border-slate-700/50 object-cover shadow-[0_0_50px_rgba(0,0,0,0.5)] transition-transform duration-700 hover:scale-105">
+        </div>
+        <h1 class="text-7xl md:text-9xl font-extrabold tracking-tighter mb-6 leading-none">
+            Pamudi <br><span class="name-gradient">Pathirana</span>
+        </h1>
+        <p class="text-2xl md:text-3xl text-slate-400 font-light mb-16 tracking-[0.2em] uppercase">PhD Applicant | Electrical & Electronic Engineer</p>
+        <div class="flex flex-wrap justify-center gap-12 md:gap-16 mb-16 max-w-4xl">
+            <a href="mailto:ppiyabhashi@gmail.com" class="group"><svg class="premium-icon-large" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+            <a href="https://www.linkedin.com/in/thiliru-samaradiwakara/" target="_blank" class="group"><svg class="premium-icon-large" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+            <a href="https://github.com/pamudi-pi" class="group"><svg class="premium-icon-large" viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.8.1 3.2.9.8 1.3 1.9 1.3 3.1 0 4.7-2.8 5.6-5.5 6 .5.4.9 1.2.9 2.4v3.5c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg></a>
+        </div>
+
+        <link rel="icon" type="image/png" href="pamudi.png">
+    
+        <link rel="apple-touch-icon" href="pamudi.png">
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-20 relative">
+        
+        <aside class="md:w-1/4 md:sticky md:top-32 h-fit hidden md:block border-r border-white/5 pr-10">
+            <nav class="space-y-4" id="scroll-nav">
+                <a href="#education" class="nav-link active">Education</a>
+                <a href="#research" class="nav-link">Research Experience</a>
+                <a href="#experience" class="nav-link">Work Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#achievements" class="nav-link">Achievements</a>
+                <a href="#certifications" class="nav-link">Certifications & Courses</a>
+                <a href="#volunteer" class="nav-link">Extracurricular Activities & Volunteering Work</a>
+            </nav>
+        </aside>
+
+        <div class="md:w-3/4 space-y-48 pb-60">
+            
+            <section id="education" class="content-section" style="font-family: 'Inter', sans-serif;">
+    <h3 class="section-title">Education</h3>
+    <div class="space-y-10">
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="flex flex-col md:flex-row justify-between mb-4">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">University of Peradeniya</h4>
+                <span class="text-teal-400 font-mono text-sm self-center opacity-90">March 2021 — August 2025</span>
+            </div>
+            <p class="text-slate-200 text-lg font-medium leading-relaxed">B.Sc. Engineering (Honours) in Electrical and Electronic Engineering</p>
+            <div class="mt-4 flex gap-6 text-sm items-center">
+                <span class="text-white font-bold tracking-wide">GPA: 3.55</span>
+            </div>
+        </div>
+
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="flex flex-col md:flex-row justify-between mb-4">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">WISDOM Business Academy, Colombo 01, Sri Lanka</h4>
+                <span class="text-teal-400 font-mono text-sm self-center opacity-90">Octomber 2020 - February 2021</span>
+            </div>
+            <p class="text-slate-200 text-lg font-medium">CIMA Certificate Level</p>
+        </div>
+
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="flex flex-col md:flex-row justify-between mb-4">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">IMBS Green Campus, Gampaha, Sri Lanka</h4>
+                <span class="text-teal-400 font-mono text-sm self-center opacity-90">March 2020 — Octomber 2020</span>
+            </div>
+            <p class="text-slate-200 text-lg font-medium">Diploma in English Language</p>
+        </div>
+
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="flex flex-col md:flex-row justify-between mb-6">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">Visakha Vidyalaya</h4>
+                <span class="text-teal-400 font-mono text-sm self-center opacity-90">2006 — 2019</span>
+            </div>
+            
+            <div class="space-y-6 text-sm text-slate-400">
+                <div>
+                    <p class="text-white font-semibold mb-2 uppercase tracking-wider text-xs">G.C.E. Advanced Level Examination <span class=" ml-2 normal-case font-mono font-bold">(Z-Score: 2.0546)</span></p>
+                    <div class="ml-4 space-y-1 border-l border-teal-500/30 pl-4">
+                        <p><span class="text-teal-500/50 mr-2">▹</span> Combined Mathematics: <span class="text-slate-200 font-medium">A</span></p>
+                        <p><span class="text-teal-500/50 mr-2">▹</span> Chemistry: <span class="text-slate-200 font-medium">A</span></p>
+                        <p><span class="text-teal-500/50 mr-2">▹</span> Physics: <span class="text-slate-200 font-medium">B</span></p>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="text-white font-semibold mb-2 uppercase tracking-wider text-xs">G.C.E. Ordinary Level Examination</p>
+                    <div class="ml-4 border-l border-teal-500/30 pl-4">
+                        <p><span class="text-teal-500/50 mr-2">▹</span> Results: <span class="text-slate-200 font-medium">9 A's with prizes for second best results of school and English Language </span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <section id="research" class="content-section" style="font-family: 'Inter', sans-serif;">
+    <h3 class="section-title">Research Experience</h3>
+    <div class="space-y-10">
+        
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="mb-6">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">Influence of Grid Forming (GFM) and Grid Following (GFL) Large Scale Inverters on Medium Voltage Distribution Networks</h4>
+                <div class="mt-2 flex items-center gap-2">
+                </div>
+            </div>
+            
+            <div class="space-y-4 text-sm text-slate-400 ml-4">
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>GFL Vs. GFM Comparative Research : </strong> Performed a comparative study of Grid-Following (GFL) and Grid-Forming (GFM) inverters, analyzing their stability and GFM’s role in providing virtual inertia within weak, converter dominated networks.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Medium Voltage Systems and Grid Integration :</strong> Evaluated the impact of large scale solar, wind, and hydro integration on 33 kV overhead line distribution networks, focusing Sri Lankan grid context.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Modelling and Simulation in PSCAD :</strong> Executed the preliminary development of inverter control moedls in PSCAD</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="mb-6">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">Computer Vision Based Traffic Violation Detection System</h4>
+                <div class="mt-2 flex items-center gap-2">
+                    <span class="text-white text-sm italic">E-Portfolio</span>
+                    <a href="https://sites.google.com/eng.pdn.ac.lk/pamudipathirana" target="_blank" class="text-white hover:text-teal-300 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="space-y-4 text-sm text-slate-400 ml-4">
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Predictive Model Research : </strong> Conducted an analysis of Machine Learning algorithms Random Forest, XGBoost, and SVM evaluating their performance for real-time traffic violation detection.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Detection and Tracking :</strong> Developed a real-time violation detection system utilizing YOLO-V8 for high accuracy multi class object detection and DeepSORT for robust multi object tracking across video frames.
+</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Model Optimization :</strong> Refined deep learning architectures and detection pipelines to enhance performance in challenging environments while reducing inference latency for real-time edge deployment.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+            <section id="experience" class="content-section" style="font-family: 'Inter', sans-serif;">
+    <h3 class="section-title">Work Experience</h3>
+    <div class="space-y-10">
+
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="flex flex-col md:flex-row justify-between mb-6">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">Temporary Instructor </h4>
+                <span class="text-teal-400 font-mono text-sm self-center font-bold">Nov 2025 - Present</span>
+            </div>
+            <div class="mb-6">
+                <div class="flex items-center gap-2">
+                    <p class="text-white text-sm italic">Department of Electrical and Electronic Engineering - University of Peradeniya, Sri Lanka</p>
+                    <a href="https://web2.ee.pdn.ac.lk/" class="text-white hover:text-teal-300 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                    </a>
+                </div>
+                <p class="text-slate-500 text-xs mt-1">Peradeniya, Sri Lanka</p>
+            </div>
+            
+            <div class="space-y-4 text-sm text-slate-400 ml-4">
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Instructor-in-Charge (IIC): EE380- Electrical Power and Machines, EE354- Power Engineering</strong> Manage and conduct laboratory sessions and technical discussions for 2nd and 3rd year undergraduates, providing hands-on exposure to electrical power systems while ensuring adherence to safety protocols and precise measurement techniques.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Lab Development and Restructuring :</strong> Restructure laboratory experiments and instruction sheets to align with current academic curricula and industrial standards, ensuring all practical tasks meet specific Intended Learning Outcomes (ILOs).</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Technical Mentorship and Academic Support :</strong> Mentorship to undergraduate students by facilitating technical discussions, and providing hands on guidance for their design projects and experiments.</p>
+                </div>
+               
+            </div>
+        </div>
+
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="flex flex-col md:flex-row justify-between mb-6">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">Trainee Electrical Engineer</h4>
+                <span class="text-teal-400 font-mono text-sm self-center font-bold">July 2024 - Oct 2024</span>
+            </div>
+            <div class="mb-6">
+                <div class="flex items-center gap-2">
+                    <p class="text-white text-sm italic">IPD Colombo (Pvt) Ltd</p>
+                    <a href="https://ipd.lk/" class="text-white hover:text-teal-300 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                    </a>
+                </div>
+                <p class="text-slate-500 text-xs mt-1">Colombo, Sri Lanka</p>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-400 ml-4">
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>CAD Design and Layout Drafting :</strong> Performed comprehensive battery cell testing and performance benchmarking to evaluate capacity, efficiency, and reliability for electric vehicle (EV) applications.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Cost Estimation :</strong> Conducted thermal analysis of battery cells and modules to assess heat generation, dissipation, and safety under various operating conditions.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong> Compliance with International Standards :</strong> Assisted in the design and development of Battery Management Systems, including PCB design, component selection, and hands-on soldering.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Quality Assurance and Review Process :</strong> Contributed to the design, assembly, and testing of high-efficiency battery modules aimed at improving performance, safety, and durability of EV solutions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="flex flex-col md:flex-row justify-between mb-6">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">Trainee Electrical Engineer</h4>
+                <span class="text-teal-400 font-mono text-sm self-center font-bold">July 2024 - Oct 2024</span>
+            </div>
+            <div class="mb-6">
+                <div class="flex items-center gap-2">
+                    <p class="text-white text-sm italic">IPD Colombo (Pvt.) Ltd.</p>
+                    <a href="https://ipd.lk/" class="text-white hover:text-teal-300 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                    </a>
+                </div>
+                <p class="text-slate-500 text-xs mt-1">Colombo, Sri Lanka</p>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-400 ml-4">
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Distribution Board (DB) Design:</strong> Involved in designing electrical distribution boards for commercial and industrial installations, including panel layout drafting and protective device selection.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Cost Estimation and Planning:</strong> Performed cost estimation for DB components and overall electrical setups to optimize project budgets and resource allocation.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p><strong>Quality Assurance and Compliance:</strong> Supported QA processes to ensure adherence to industrial electrical standards, safety regulations, and project specifications.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="projects" class="content-section" style="font-family: 'Inter', sans-serif;">
+    <h3 class="section-title">Academic Projects</h3>
+    <div class="space-y-10">
+
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="mb-6">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">Development of "Automatically and Manually Light Intensity Control Flashlight"</h4>
+                <p class="text-white text-sm italic mt-1">Embedded Systems & Smart Devices</p>
+            </div>
+            
+            <div class="space-y-4 text-sm text-slate-400 ml-4">
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p>Designed and implemented a <strong>smart outdoor flashlight</strong> featuring adaptive brightness control, GPS tracking, compass navigation, and manual override.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p>Built on an <strong>embedded system architecture</strong> that seamlessly integrates sensors and user interfaces for enhanced functionality and reliability in adventure and field operations.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="mb-6">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">Design of "Noninvasive or Minimally Invasive Blood Glucose Sensor"</h4>
+                <p class="text-white text-sm italic mt-1">Biomedical Instrumentation & Optical Sensing</p>
+            </div>
+
+            <div class="space-y-4 text-sm text-slate-400 ml-4">
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p>Designed a noninvasive blood glucose monitoring system utilizing <strong>light-based optical sensing (near-infrared spectroscopy)</strong> to measure glucose levels without needles.</p>
+                </div>
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p>Developed and tested a prototype integrating <strong>optical sensors and signal processing algorithms</strong>, enabling real-time glucose level estimation with pain-free operation.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+            <section id="skills" class="content-section">
+                <h3 class="section-title">Skills</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-2xl">
+                        <h5 class="text-white font-bold mb-3 text-xs uppercase tracking-widest"> Programming Languages</h5>
+                        <p class="text-sm text-slate-400">Python, C, MATLAB, R</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl">
+                        <h5 class="text-white font-bold mb-3 text-xs uppercase tracking-widest">Developer Tools</h5>
+                        <p class="text-sm text-slate-400">Proteus, Altium Designer, Eagle CAD, EasyEDA, Docker, Git, VS Code, Wireshark, Cisco Packer
+Tracer, Microsoft Office</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl">
+                        <h5 class="text-white font-bold mb-3 text-xs uppercase tracking-widest">Frameworks and Libraries</h5>
+                        <p class="text-sm text-slate-400">OpenCV, Pytorch, NumPy, Pandas, Scikit-learn, TensorFlow</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="achievements" class="content-section" style="font-family: 'Inter', sans-serif;">
+    <h3 class="section-title">Achievements</h3>
+    <div class="space-y-10">
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="mb-6">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">Formula Bharat 2024</h4>
+                <p class="text-white text-sm italic mt-1">International Engineering Competition</p>
+            </div>
+            <div class="space-y-4 text-sm text-slate-400 ml-4">
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p>Achieved <strong>6th place globally</strong> in the Formula Bharat competition, demonstrating excellence in engineering design and team collaboration.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="mb-6">
+                <h4 class="text-2xl font-bold text-teal-400 uppercase tracking-tight">ACES Hackathon 2023</h4>
+                <p class="text-white text-sm italic mt-1">University of Peradeniya</p>
+            </div>
+            <div class="space-y-4 text-sm text-slate-400 ml-4">
+                <div class="relative pl-6">
+                    <span class="absolute left-0 text-teal-500/50">▹</span>
+                    <p>Awarded <strong>Most Popular Team</strong> based on innovation, presentation, and community voting during the annual technical hackathon.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="certifications" class="content-section" style="font-family: 'Inter', sans-serif;">
+    <h3 class="section-title">Certifications and Courses</h3>
+    <div class="space-y-6">
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Supervised Machine Learning: Regression and Classification</h4>
+                    <p class="text-teal-400 text-sm italic">Stanford University and Deeplearning.AI</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Wireless Communications for Everybody</h4>
+                    <p class="text-teal-400 text-sm italic">Yonsei University</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Programming for Everybody (Getting Started with Python)</h4>
+                    <p class="text-teal-400 text-sm italic">University of Michigan</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Python for Beginners</h4>
+                    <p class="text-teal-400 text-sm italic">Center for Open and Distance Learning, University of Moratuwa, Sri Lanka</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Web Design for Beginners</h4>
+                    <p class="text-teal-400 text-sm italic">Center for Open and Distance Learning, University of Moratuwa, Sri Lanka</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Front - End Web Development</h4>
+                    <p class="text-teal-400 text-sm italic">Center for Open and Distance Learning, University of Moratuwa, Sri Lanka</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Autocad for Engineering Drawings</h4>
+                    <p class="text-teal-400 text-sm italic">Unical Institute, Kurunegala</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Information Technology Foundation Course</h4>
+                    <p class="text-teal-400 text-sm italic">Wayamba Nenasala IT Training Center, Kurunegala</p>
+                </div>
+
+                <div class="space-y-1 md:col-span-2">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">The Leadership, Life Skills and Personality development Training</h4>
+                    <p class="text-teal-400 text-sm italic">Joseph Vaz Institute (Affiliated to The Aquinas College of Higher Studies, Colombo)</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="volunteer" class="content-section" style="font-family: 'Inter', sans-serif;">
+    <h3 class="section-title">Extracurricular & Volunteering Work</h3>
+    <div class="space-y-6">
+        <div class="glass-card p-10 rounded-3xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Chairperson</h4>
+                    <p class="text-teal-400 text-sm italic">IEEE Student Branch, University of Peradeniya (2024/25)</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Vice Chairperson</h4>
+                    <p class="text-teal-400 text-sm italic">IEEE Student Branch, University of Peradeniya (2022/23)</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Delegate</h4>
+                    <p class="text-teal-400 text-sm italic">IEEE Sri Lanka Section Students/Young Professionals/Women in Engineering Congress (2024, 2025)</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Member</h4>
+                    <p class="text-teal-400 text-sm italic">Electronics Department, Optimum Racing, University of Peradeniya</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Member</h4>
+                    <p class="text-teal-400 text-sm italic">Rotaract Club, University of Peradeniya</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Center Coordinator</h4>
+                    <p class="text-teal-400 text-sm italic">Project "Arunella", Faculty of Engineering, University of Peradeniya</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Mathematics Tutor</h4>
+                    <p class="text-teal-400 text-sm italic">Project "Ganitha Saviya", Sasnaka Sansada Foundation</p>
+                </div>
+
+                <div class="space-y-1">
+                    <h4 class="text-lg font-bold text-white uppercase tracking-tight">Violinist</h4>
+                    <p class="text-teal-400 text-sm italic">Erandhathi Lalit Kalayathanaya, Sri Lanka and Bhatkande Sangit Vidyapith, Lucknow, India</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+            <footer class="text-center opacity-20 text-[10px] tracking-[1rem] uppercase">
+                Pamudi Pathirana © 2026
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        // SIGNIFICANT SCROLL DYNAMICS
+        const shape1 = document.getElementById('shape1');
+        const shape2 = document.getElementById('shape2');
+        const shape3 = document.getElementById('shape3');
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+
+            // Parallax Background Movements
+            shape1.style.transform = `translate(${scrollY * 0.1}px, ${scrollY * 0.05}px) rotate(${scrollY * 0.02}deg)`;
+            shape2.style.transform = `translate(-${scrollY * 0.08}px, -${scrollY * 0.1}px) rotate(-${scrollY * 0.01}deg)`;
+            shape3.style.transform = `scale(${1 + scrollY * 0.0005}) translate(-50%, -50%)`;
+
+            // Scroll Spy
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
